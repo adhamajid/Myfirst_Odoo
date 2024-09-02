@@ -1,3 +1,6 @@
 {
-    'name' : "Arkana Module"
+    'name' : "Arkana Module",
+    'depends' : ['base'],
+    'application' : True,
+    'installable' : True,
 }
