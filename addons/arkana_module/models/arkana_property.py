@@ -5,7 +5,7 @@ class ArkanaProperty(models.Model):
     _name = 'arkana.property'
     _description = "Arkana Property"
 
-    name = fields.Char(required=True)
+    name = fields.Char("Title", required=True)
     description = fields.Text()
     postcode = fields.Char()
     date_availability = fields.Date(copy=False, default=lambda self: fields.Datetime.now() + relativedelta(months=3))

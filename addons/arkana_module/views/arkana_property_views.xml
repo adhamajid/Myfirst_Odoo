@@ -1,7 +1,88 @@
 <odoo>
+    <!-- Action  -->
     <record id="arkana_property_action" model="ir.actions.act_window">
-        <field name="name">Arkana Property</field>
+        <field name="name">Properties</field>
         <field name="res_model">arkana.property</field>
         <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Search & Filter -->
+    <record id="arkana_property_view_search_filter" model="ir.ui.view">
+        <field name="name">arkana.property.view.search.filter</field>
+        <field name="model">arkana.property</field>
+        <field name="arch" type="xml">
+            <search string="Tests">
+                <field name="name"/>
+                <field name="postcode"/>
+                <field name="expected_price"/>
+                <field name="bedrooms"/>
+                <field name="living_area"/>
+                <field name="facades"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Tree  -->
+     <record id="arkana_property_view_tree" model="ir.ui.view">
+        <field name="name">arkana.property.view.tree</field>
+        <field name="model">arkana.property</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <!-- aku ganti string/ judul "name" dari file arkana_property.py  -->
+                <field name="postcode"/>
+                <field name="bedrooms"/>
+                <field name="living_area"/>
+                <field name="expected_price"/>
+                <field name="selling_price"/>
+                <!-- cara ganti string di uinya pakai cara 2 -->
+                <field name="date_availability" string="Available From"/>  
+            </tree>
+        </field>
+    </record>
+
+    
+    <!-- Form -->
+    <record id="arkana_property_view_form" model="ir.ui.view">
+        <field name="name">arkana.property.view.form</field>
+        <field name="model">arkana.property</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="postcode"/>
+                            <field name="date_availability"/>
+                        </group>
+                        <group>
+                            <field name="expected_price"/>
+                            <field name="selling_price"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <group>
+                                <field name="description"/>
+                                <field name="bedrooms"/>
+                                <field name="living_area"/>
+                                <field name="facades"/>
+                                <field name="garage"/>
+                                <field name="garden"/>
+                                <field name="garden_area"/>
+                                <field name="garden_orientation"/>
+                            </group>
+                        </page>
+                        <page string="Active">
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
     </record>
 </odoo>
