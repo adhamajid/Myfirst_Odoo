@@ -1,0 +1,7 @@
+<odoo>
+    <record id="arkana_property_action" model="ir.actions.act_window">
+        <field name="name">Arkana Property</field>
+        <field name="res_model">arkana.property</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
