@@ -18,6 +18,7 @@
                 <field name="bedrooms"/>
                 <field name="living_area"/>
                 <field name="facades"/>
+                <filter name="status" string="Available" domain="[('status', 'in', ['new', 'offer_received'])]"/>
             </search>
         </field>
     </record>
@@ -36,7 +37,8 @@
                 <field name="expected_price"/>
                 <field name="selling_price"/>
                 <!-- cara ganti string di uinya pakai cara 2 -->
-                <field name="date_availability" string="Available From"/>  
+                <field name="date_availability" string="Available From"/>
+                <field name="status"/>  
             </tree>
         </field>
     </record>
@@ -56,6 +58,7 @@
                         <group>
                             <field name="postcode"/>
                             <field name="date_availability"/>
+                            <field name="status"/>
                         </group>
                         <group>
                             <field name="expected_price"/>
