@@ -1,4 +1,5 @@
 from odoo import api, models, fields, _
+from odoo.exceptions import UserError
 from dateutil.relativedelta import relativedelta
 
 class ArkanaProperty(models.Model):
@@ -75,3 +76,17 @@ class ArkanaProperty(models.Model):
         else:
             self.garden_area = None
             self.garden_orientation = None
+
+    def action_sold(self):
+        for record in self:
+            if record.status == "canceled":
+                raise UserError("Canceled property cannot be sold.")
+            record.status = "sold"
+        return True
+
+    def action_cancel(self):
+        for record in self:
+            if record.status == "sold":
+                raise UserError("Sold property cannot be canceled.")
+            record.status = "canceled"
+        return True

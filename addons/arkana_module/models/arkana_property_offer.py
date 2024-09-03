@@ -1,5 +1,6 @@
 from odoo import api, fields, models
 from datetime import timedelta
+from odoo.exceptions import UserError
 
 
 class ArkanaPropertyOffer(models.Model):
@@ -34,3 +35,18 @@ class ArkanaPropertyOffer(models.Model):
                 record.validity = delta.days
             else:
                 record.validity = (record.date_deadline - fields.Date.today()).days
+
+    def action_accept(self):
+        for record in self:
+            if record.property_id.status == "sold":
+                raise UserError("Cannot accept offer for a sold property.")
+            record.state = "accepted"
+            record.property_id.buyer_id = record.partner_id
+            record.property_id.selling_price = record.price
+            record.property_id.status = 'offer_accepted'
+        return True
+
+    def action_refuse(self):
+        for record in self:
+            record.state = "refused"
+        return True
