@@ -3,6 +3,11 @@
         <menuitem id="arkana_property_first_level_menu" name="Advertisements">
             <menuitem id="arkana_property_menu_action" action="arkana_property_action"/>
         </menuitem>
+
+        <menuitem id="arkana_property_settings_menu" name="Settings">
+            <menuitem id="arkana_property_type_menu_action" action="arkana_property_type_action"/>
+            <menuitem id="arkana_property_tag_menu_action" action="arkana_property_tag_action"/>
+        </menuitem>
     </menuitem>
 
 </odoo>

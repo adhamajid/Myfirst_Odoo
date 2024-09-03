@@ -41,3 +41,9 @@ class ArkanaProperty(models.Model):
     )
 
     active = fields.Boolean(default=False)
+
+    property_type_id = fields.Many2one("arkana.property.type", string="Property Type")
+    salesperson_id = fields.Many2one("res.users", string="Salesman", index=True, default=lambda self: self.env.user)
+    buyer_id = fields.Many2one("res.partner", string="Buyer", index=True, copy=False)
+    tag_ids = fields.Many2many("arkana.property.tag", string="Property Tags")
+    offer_ids = fields.One2many("arkana.property.offer", "property_id", string="Offers")

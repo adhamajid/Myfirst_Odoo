@@ -11,14 +11,16 @@
         <field name="name">arkana.property.view.search.filter</field>
         <field name="model">arkana.property</field>
         <field name="arch" type="xml">
-            <search string="Tests">
+            <search>
                 <field name="name"/>
                 <field name="postcode"/>
                 <field name="expected_price"/>
                 <field name="bedrooms"/>
                 <field name="living_area"/>
                 <field name="facades"/>
+                <field name="property_type_id"/>
                 <filter name="status" string="Available" domain="[('status', 'in', ['new', 'offer_received'])]"/>
+                <filter name="postcode" string="Postcode" context="{'group_by':'postcode'}"/>
             </search>
         </field>
     </record>
@@ -31,6 +33,7 @@
             <tree>
                 <field name="name"/>
                 <!-- aku ganti string/ judul "name" dari file arkana_property.py  -->
+                <field name="property_type_id"/>
                 <field name="postcode"/>
                 <field name="bedrooms"/>
                 <field name="living_area"/>
@@ -55,7 +58,9 @@
                         <h1><field name="name"/></h1>
                     </div>
                     <group>
+                        <field name="tag_ids" widget="many2many_tags"/>
                         <group>
+                            <field name="property_type_id" options="{'no_create': true}"/>
                             <field name="postcode"/>
                             <field name="date_availability"/>
                             <field name="status"/>
@@ -81,6 +86,17 @@
                         <page string="Active">
                             <group>
                                 <field name="active"/>
+                            </group>
+                        </page>
+                        <page string="Other Info">
+                            <group>
+                                <field name="salesperson_id"/>
+                                <field name="buyer_id"/>
+                            </group>
+                        </page>
+                        <page string="Offer">
+                            <group>
+                                <field name="offer_ids"/>
                             </group>
                         </page>
                     </notebook>

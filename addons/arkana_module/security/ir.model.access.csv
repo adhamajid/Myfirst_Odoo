@@ -1,2 +1,5 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
 access_arkana_model,access_arkana_model,model_arkana_property,base.group_user,1,1,1,1
+access_arkana_property_type,access_arkana_property_type,model_arkana_property_type,base.group_user,1,1,1,1
+access_arkana_property_tag,access_arkana_property_tag,model_arkana_property_tag,base.group_user,1,1,1,1
+access_arkana_property_offer,access_arkana_property_offer,model_arkana_property_offer,base.group_user,1,1,1,1
