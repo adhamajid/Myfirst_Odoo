@@ -106,3 +106,9 @@ class ArkanaProperty(models.Model):
             if not float_is_zero(record.selling_price, precision_digits=precision):
                 if float_compare(record.selling_price, 0.9 * record.expected_price, precision_digits=precision) < 0:
                     raise ValidationError("Selling price cannot be lower than 90% of the expected price.")
+                
+        def unlink(self):
+            for record in self:
+                if record.status not in ["new", "canceled"]:
+                    raise UserError("You cannot delete a property except it is 'New' or 'Canceled' state.")
+        return super(ArkanaProperty, self).unlink()
