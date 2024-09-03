@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import api, models, fields, _
 from dateutil.relativedelta import relativedelta
 
 class ArkanaProperty(models.Model):
@@ -47,3 +47,31 @@ class ArkanaProperty(models.Model):
     buyer_id = fields.Many2one("res.partner", string="Buyer", index=True, copy=False)
     tag_ids = fields.Many2many("arkana.property.tag", string="Property Tags")
     offer_ids = fields.One2many("arkana.property.offer", "property_id", string="Offers")
+    total_area = fields.Float(compute="_compute_total_area", string="Total Area")
+    best_price = fields.Float(compute="_compute_best_price", string="Best Offer")
+
+    @api.depends("living_area", "garden_area")
+    def _compute_total_area(self):
+        for record in self:
+            record.total_area = sum([record.living_area, record.garden_area])
+
+    @api.depends("offer_ids.price")
+    def _compute_best_price(self):
+        for record in self:
+            if record.offer_ids:
+                record.best_price = max(record.offer_ids.mapped("price"))
+            else:
+                record.best_price = 0.0
+
+    @api.onchange("garden")
+    def _onchange_garden(self):
+        if self.garden:
+            self.garden_area = 10
+            self.garden_orientation = "north"
+            return {'warning': {
+                'title': _("Info"),
+                'message': ("Kalau pilihan itu dipencet maka akan membuat Garden Area (default: 10) & Orientation (default: North)")}}
+
+        else:
+            self.garden_area = None
+            self.garden_orientation = None
