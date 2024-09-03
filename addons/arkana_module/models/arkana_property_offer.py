@@ -50,3 +50,10 @@ class ArkanaPropertyOffer(models.Model):
         for record in self:
             record.state = "refused"
         return True
+    
+    _sql_constraints = [
+        ('check_offer_price_positive', 'CHECK(price > 0)',
+         'The offer price must be strictly positive.'),
+    ]
+
+    
